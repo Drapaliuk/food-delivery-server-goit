@@ -1,8 +1,4 @@
-const qs = require('querystring');
 const fs = require('fs')
-
-
-
 
 const createId = function(){
   const random = Math.random()
@@ -13,74 +9,101 @@ const createId = function(){
 }
 
 
-
 const transformer = function(data){
-
-    let succes = {
-        status: 'succes',
-        user: undefined,
-    }
-
     let uniqeId = createId()
-
-    let keyId  = {
-      id: uniqeId
-    }
-
     let user = JSON.parse(fs.readFileSync('src/db/users/users.json', 'UTF8'))
-    let dataParse = JSON.parse(data)
-    succes.order = Object.assign(keyId, dataParse)
-    user.push(succes)
+    data.id = uniqeId
+    user.push(data)
     let final = JSON.stringify(user)
     fs.writeFileSync('src/db/users/users.json', final, function(){console.log('done')})
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const signUpRoute = (request, response) => {
+    const user =  request.body
+    console.log(user)
 
-    request.on('data', function (data) {
-        transformer(data)
-    })
+    transformer(user)
    
 
-    response.end('succes')
+    response.json({
+        "status":"succes",
+        "user": user
+    })
 
 };
 
 
 module.exports = signUpRoute;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// onst transformer = function(data){
+//     let succes = {
+//         status: 'succes',
+//         user: undefined,
+//     }
+
+//     let uniqeId = createId()
+//     let keyId  = {
+//       id: uniqeId
+//     }
+
+//     let user = JSON.parse(fs.readFileSync('src/db/users/users.json', 'UTF8'))
+
+//     let dataParse = JSON.parse(data)
+
+//     succes.order = Object.assign(keyId, dataParse)
+
+//     user.push(succes)
+
+//     let final = JSON.stringify(user)
+    
+//     fs.writeFileSync('src/db/users/users.json', final, function(){console.log('done')})
+// }

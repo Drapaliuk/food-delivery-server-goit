@@ -12,4 +12,4 @@ const allProducts = (request, response) => {
 
 module.exports = allProducts;
 
-allProducts.json
+// allProducts.json

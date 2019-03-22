@@ -1,6 +1,4 @@
 const fs = require('fs')
-const querystring = require('querystring')
-const url = require('url')
 
 
 const findById = function(id){
@@ -15,8 +13,8 @@ const findById = function(id){
 
 
 const byIdRoute = (request, response) => {
-    const id = Number(url.parse(request.url, true).query.id)
-
+    // const id = Number(url.parse(request.url, true).query.id)
+    const id = Number(request.params.id)
     findById(id)
 
     response.writeHead(200, {

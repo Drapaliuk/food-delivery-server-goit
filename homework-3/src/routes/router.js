@@ -12,11 +12,11 @@ const createOrder = require('./create-order/createOrder')
 const routess = router
 .get('/', mainRoute)
 .get('/all-products', allProducts)
-.get('/getUser', getUser)
+.get('/users/:id', getUser)
 .get('/get-by-category', getCat)
-.get('/get-products-by-id', getById)
+.get('/products/:id', getById)
 
-.post('/signup', signUpRoute)
-.post('/create-order', createOrder)
+.post('/users', signUpRoute)
+.post('/orders', createOrder)
 
 module.exports = routess;
